@@ -40,10 +40,6 @@ export const signup_user = async (req, res, next) => {
 export const signIn_user = async (req, res, next) => {
     try {
         const library_validation = Joi.object().keys({
-            // mobile: Joi.number().integer().min(10 ** 9).max(10 ** 10 - 1).required().messages({
-            //     'number.min': 'Mobile number should be 10 digit.',
-            //     'number.max': 'Mobile number should be 10 digit'
-            // }),
             email: Joi.string().email().required(),
             password: Joi.string().min(4).max(20).required().messages({
                 'string.min': 'Password must be at least 4 characters long!',

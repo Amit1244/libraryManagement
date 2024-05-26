@@ -115,7 +115,7 @@ export const getcategory = async (req, res) => {
             return res.json({ status: 200, success: true, message: "Category get succesfully.", data: { getCategory, count } })
         }
         else {
-            return res.json({ status: 404, success: false, message: "Category not found!", data: {} })
+            return res.json({ status: 200, success: false, message: "Category not found!", data: { getCategory: [], count: 0 } })
         }
     } catch (error) {
         return res.json({ status: 500, success: false, message: "Internal server error!", data: {} })

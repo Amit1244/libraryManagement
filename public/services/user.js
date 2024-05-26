@@ -1,4 +1,6 @@
+import moment from "moment"
 import { commonSendResponse, encryptPassword } from "../common/servicesResponse.js"
+import BookRecord from "../models/advanceBook.js"
 import Book from "../models/book.js"
 import User from "../models/user.js"
 import { emailTemplate } from "../templates/email.js"
@@ -122,6 +124,57 @@ export const removeFromFavourite = async (_id, bookId) => {
 export const advanceGetBook = async (bookId) => {
     try {
         const response = await Book.findByIdAndUpdate({ _id: bookId }, { $inc: { advanceBook: +1 } })
+        return commonSendResponse(response)
+    } catch (error) {
+        return error
+    }
+}
+
+// Advance book entry in other table
+export const advanceBookRecord = async (bookId, user) => {
+    try {
+        let date = new Date();
+        const response = await BookRecord.create({ date: moment().format("YYYY-MM-DD"), time: `${date.getHours()}:${date.getMinutes()}`, userName: user.name, userId: user._id, bookId: bookId })
+        return commonSendResponse(response)
+    } catch (error) {
+        return error
+    }
+}
+
+// Get advance booked details
+export const getBooksDetails = async (skip, limit) => {
+    try {
+        const response = await BookRecord.aggregate([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "userDetails"
+                }
+            },
+            { $skip: +skip },
+            { $limit: +limit },
+        ])
+        return commonSendResponse(response)
+    } catch (error) {
+        return error
+    }
+}
+
+// Get total number of count
+export const getBooksDetailsCount = async () => {
+    try {
+        const response = await BookRecord.countDocuments([
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "userDetails"
+                }
+            }
+        ])
         return commonSendResponse(response)
     } catch (error) {
         return error

@@ -12,6 +12,16 @@ const BookDetails = new mongoose.Schema({
         default: "",
         ref: "user"
     },
+    time: {
+        type: String,
+        required: false,
+        default: "",
+    },
+    date: {
+        type: String,
+        required: false,
+        default: "",
+    },
     bookId: {
         type: mongoose.Schema.Types.ObjectId,
         required: false,
@@ -23,5 +33,5 @@ const BookDetails = new mongoose.Schema({
         timestamps: true
     }
 )
-const Book = new mongoose.model("Book", BookDetails)
-export default Book;
+const BookRecord = new mongoose.model("BookRecord", BookDetails)
+export default BookRecord;
