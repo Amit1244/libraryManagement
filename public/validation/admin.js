@@ -147,6 +147,9 @@ export const edit_category = async (req, res, next) => {
             next();
         }
     }
+    catch {
+        console.log("error");
+    }
 }
 
 

@@ -274,6 +274,14 @@ export const removeCategory = async (req, res) => {
             });
         }
     }
+    catch {
+        return res.json({
+            status: 500,
+            success: false,
+            message: "Internal server error!",
+            data: {},
+        });
+    }
 }
 
 export const statusOfBook = async (req, res) => {
