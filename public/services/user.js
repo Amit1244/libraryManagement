@@ -131,10 +131,10 @@ export const advanceGetBook = async (bookId) => {
 }
 
 // Advance book entry in other table
-export const advanceBookRecord = async (bookId, user) => {
+export const advanceBookRecord = async (bookId, user, day) => {
     try {
         let date = new Date();
-        const response = await BookRecord.create({ date: moment().format("YYYY-MM-DD"), time: `${date.getHours()}:${date.getMinutes()}`, userName: user.name, userId: user._id, bookId: bookId })
+        const response = await BookRecord.create({ date: moment().format("YYYY-MM-DD"), time: `${date.getHours()}:${date.getMinutes()}`, userName: user.name, userId: user._id, day: day, bookId: bookId })
         return commonSendResponse(response)
     } catch (error) {
         return error

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { favourite_books, get_books, otp_verify, signIn_user, signup_user } from "../validation/user.js";
+import { advance_books_booked, favourite_books, get_books, otp_verify, signIn_user, signup_user } from "../validation/user.js";
 import { advanceBook, favouriteBook, getBook, getBookDetails, getFavoriteBook, removeFavBooks, userLogin, userOtpVerify, userRegister } from "../controllers/user.js";
 import { verifytoken } from "../utills/jwt.helper.js";
 
@@ -19,7 +19,7 @@ router.get("/getFavouriteBook", verifytoken, get_books, getFavoriteBook)
 router.put("/removeFavourite", verifytoken, favourite_books, removeFavBooks)
 
 // Advance booked book
-router.post("/advancedBook", verifytoken, favourite_books, advanceBook)
+router.post("/advancedBook", verifytoken, advance_books_booked, advanceBook)
 router.get("/getBookDetails", verifytoken, get_books, getBookDetails)
 
 export default router; 

@@ -12,6 +12,14 @@ const BookDetails = new mongoose.Schema({
         default: "",
         ref: "user"
     },
+    day: {
+        type: String,
+        required: false,
+    },
+    status: {
+        type: String,      // 1 - approve , 2 - reject
+        required: false,
+    },
     time: {
         type: String,
         required: false,

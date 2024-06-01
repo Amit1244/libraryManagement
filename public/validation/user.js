@@ -125,3 +125,24 @@ export const favourite_books = async (req, res, next) => {
         console.log("error");
     }
 }
+
+export const advance_books_booked = async (req, res, next) => {
+    try {
+        const library_validation = Joi.object().keys({
+            bookId: Joi.string().required(),
+            days: Joi.string().required()
+        })
+        const { error } = library_validation.validate(req.body);
+        if (error || error === null) {
+            return res.status(400).json({
+                status: 400,
+                success: false,
+                message: error.message,
+            })
+        } else {
+            next()
+        }
+    } catch (error) {
+        console.log("error");
+    }
+}

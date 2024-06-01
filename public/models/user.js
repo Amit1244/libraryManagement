@@ -6,6 +6,10 @@ const userDetails = new mongoose.Schema({
         required: false,
         default: ""
     },
+    id: {
+        type: String,
+        required: false,
+    },
     email: {
         type: String,
         required: false,

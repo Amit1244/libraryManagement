@@ -358,7 +358,7 @@ export const advanceBook = async (req, res) => {
         });
       } else {
         const advanceBook = await advanceGetBook(req?.body?.bookId);
-        const isBooked = await advanceBookRecord(req?.body?.bookId, req.user);
+        const isBooked = await advanceBookRecord(req?.body?.bookId, req.user, req.body.day)
         if (advanceBook && isBooked) {
           return res.json({
             status: 200,
